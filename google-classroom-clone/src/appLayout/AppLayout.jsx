@@ -1,0 +1,105 @@
+"use client";
+
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import { createTheme } from '@mui/material/styles';
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+import HomeIcon from '@mui/icons-material/Home';
+import GroupIcon from '@mui/icons-material/Group';
+import SettingsIcon from '@mui/icons-material/Settings';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import TopicIcon from '@mui/icons-material/Topic';
+import { AppProvider } from '@toolpad/core/AppProvider';
+import { DashboardLayout } from '@toolpad/core/DashboardLayout';
+import HomeComponent from '@/view/home/home';
+import { useRouter } from 'next/navigation';
+
+
+const AppLayout = ({children}) => {
+  const router = useRouter();
+  const NAVIGATION = [
+    {
+      segment: "home",
+      title: "Home",
+      icon: <HomeIcon />,
+      href: "/home",
+    },
+    {
+      segment: "calendar",
+      title: "Calendar",
+      icon: <CalendarTodayIcon />,
+      href: "/calendar",
+    },
+    {
+      kind: 'divider',
+    },
+    {
+      segment: 'teaching',
+      title: 'Teaching',
+      icon: <GroupIcon />,
+    
+      children: [
+        {
+          segment: 'review',
+          title: 'Review',
+          icon: <TopicIcon />,
+          href: '/teaching/review'
+         
+        },
+      ],
+    },
+    {
+      segment: "archivedclasses",
+      title: "Archived Classes",
+      icon: <DriveFolderUploadIcon />,
+     href: '/archivedclasses'
+    },
+    {
+      segment: "settings",
+      title: "Settings",
+      icon: <SettingsIcon />,
+     href: '/settings'
+    },
+  ];
+
+  const demoTheme = createTheme({
+    cssVariables: {
+      colorSchemeSelector: "data-toolpad-color-scheme",
+    },
+   // add a account logo
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 600,
+        lg: 1200,
+        xl: 1536,
+      },
+    },
+  });
+
+
+  return (
+    <AppProvider
+      navigation={NAVIGATION}
+      branding={{
+        logo: <img src="https://www.gstatic.com/classroom/logo_square_rounded.svg" alt="Google Classroom logo" />,
+        title: "Classroom",
+        homeUrl: "/home",
+      }}
+    
+      
+      theme={demoTheme}
+    >
+      <DashboardLayout> 
+    
+
+      {children}
+       
+      </DashboardLayout>
+    </AppProvider>
+  );
+};
+
+export default AppLayout;
