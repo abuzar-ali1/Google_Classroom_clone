@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+
 import { createTheme } from '@mui/material/styles';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import HomeIcon from '@mui/icons-material/Home';
@@ -12,12 +11,11 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import TopicIcon from '@mui/icons-material/Topic';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
-import HomeComponent from '@/view/home/home';
-import { useRouter } from 'next/navigation';
 
 
+  
 const AppLayout = ({children}) => {
-  const router = useRouter();
+
   const NAVIGATION = [
     {
       segment: "home",
