@@ -1,12 +1,14 @@
 "use client";
-
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
+import AssignmentList from "@/app/ui/components/AssigmentsList/AssignmentList";
 import ClassroomHeader from "@/app/ui/components/ClassroomHeader/ClassroomHeader";
 import { classrooms } from "@/data/data";
 import { Box } from "@mui/material";
 import { useParams } from "next/navigation";
 import React from "react";
 
-export default function StreamContent() {
+export default function StreamContent({params}) {
   const classroom = classrooms.find(
     (classroom) => classroom.id === Number(useParams().id)
   );
@@ -16,7 +18,9 @@ export default function StreamContent() {
 
   return (
     <div className="py-4">
-      <ClassroomHeader classroomId={classroom.id} />
+        <Provider store={store}>
+
+          <ClassroomHeader classroomId={classroom.id} />
 
       <Box
         sx={{ backgroundImage: `url(${classroom.img})` }}
@@ -27,6 +31,8 @@ export default function StreamContent() {
         </h2>
       </Box>
       {/* Add assignments/resources section here */}
+      <AssignmentList classroomId={params.classroomId} />
+      </Provider>
     </div>
   );
 }
