@@ -23,11 +23,11 @@ import {
   
   const AnnouncementCard = () => {
     const [anchorEl, setAnchorEl] = useState(null);
-    // const user = {
-    //   name: 'Abuzar Ali',
-    //   email: 'abuzarali.edu@gmail.com',
-    //   image: 'https://avatars.githubusercontent.com/u/168404860?v=4',
-    // };
+    const user = {
+      name: 'Abuzar Ali',
+      email: 'abuzarali.edu@gmail.com',
+      image: 'https://avatars.githubusercontent.com/u/168404860?v=4',
+    };
   
     const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
     const handleMenuClose = () => setAnchorEl(null);
