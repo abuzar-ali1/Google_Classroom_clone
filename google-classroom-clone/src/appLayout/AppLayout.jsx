@@ -67,7 +67,7 @@ const AppLayout = ({children}) => {
     user: {
       name: 'Abuzar Ali',
       email: 'abuzarali.edu@gmail.com',
-      image: 'https://www.gstatic.com/classroom/logo_square_rounded.svg" alt="Google Classroom logo',
+      image: 'https://avatars.githubusercontent.com/u/168404860?v=4',
     },
   });
 
@@ -78,7 +78,7 @@ const AppLayout = ({children}) => {
           user: {
             name: 'Abuzar Ali',
             email: 'abuzarali.edu@gmail.com',
-            image: 'https://www.gstatic.com/classroom/logo_square_rounded.svg" alt="Google Classroom logo',
+            image: 'https://avatars.githubusercontent.com/u/168404860?v=4',
           },
         });
       },
