@@ -26,7 +26,7 @@ import {
     const user = {
       name: 'Abuzar Ali',
       email: 'abuzarali.edu@gmail.com',
-      image: '',
+      image: 'https://avatars.githubusercontent.com/u/168404860?v=4',
     };
   
     const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
