@@ -9,7 +9,7 @@ import ClassCode from "@/app/ui/components/ClassCode/ClassCode";
 import { setLoading } from "@/redux/slices/loadingSlice";
 import { useDispatch } from "react-redux";
 import GoogleMeetCard from "@/app/ui/components/MeetCard/MeetCard";
-// import AnnouncementCard from "@/app/ui/components/AnnouncementCard/AnnouncementCard";
+import AnnouncementCard from "@/app/ui/components/AnnouncementCard/AnnouncementCard";
 
 export default function StreamContent({ params }) {
   const dispatch = useDispatch();
@@ -60,7 +60,7 @@ export default function StreamContent({ params }) {
           <ClassCode sx={{ mt: 2 }} classroom={classroom} />
         </Box>
         <Box sx={{ width: "100%" }}>
-          {/* <AnnouncementCard/> */}
+          <AnnouncementCard/>
           <AssignmentList classroom={classroom} classroomId={params.classroomId} />
         </Box>
       </Box>

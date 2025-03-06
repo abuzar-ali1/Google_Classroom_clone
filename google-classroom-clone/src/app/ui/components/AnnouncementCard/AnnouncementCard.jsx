@@ -23,11 +23,11 @@ import {
   
   const AnnouncementCard = () => {
     const [anchorEl, setAnchorEl] = useState(null);
-    // const user = {
-    //   name: 'Abuzar Ali',
-    //   email: 'abuzarali.edu@gmail.com',
-    //   image: 'https://avatars.githubusercontent.com/u/168404860?v=4',
-    // };
+    const user = {
+      name: 'Abuzar Ali',
+      email: 'abuzarali.edu@gmail.com',
+      image: 'https://avatars.githubusercontent.com/u/168404860?v=4',
+    };
   
     const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
     const handleMenuClose = () => setAnchorEl(null);
@@ -42,7 +42,7 @@ import {
         border: '1px solid rgba(0,0,0,0.12)'
       }}>
         <CardHeader
-          // avatar={<Avatar src={user.image} alt={user.name} sx={{ width: 40, height: 40 }} />}
+          avatar={<Avatar src={user.image} alt={user.name} sx={{ width: 40, height: 40 }} />}
           title={
             <Box>
               <Typography variant="subtitle1" fontWeight="500">{user.name}</Typography>

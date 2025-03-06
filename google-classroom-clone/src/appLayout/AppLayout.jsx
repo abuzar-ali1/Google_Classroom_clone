@@ -63,30 +63,30 @@ const AppLayout = ({children}) => {
   ];
 
  
-  // const [session, setSession] = React.useState({
-  //   user: {
-  //     name: 'Abuzar Ali',
-  //     email: 'abuzarali.edu@gmail.com',
-  //     image: 'https://avatars.githubusercontent.com/u/168404860?v=4',
-  //   },
-  // });
+  const [session, setSession] = React.useState({
+    user: {
+      name: 'Abuzar Ali',
+      email: 'abuzarali.edu@gmail.com',
+      image: 'https://avatars.githubusercontent.com/u/168404860?v=4',
+    },
+  });
 
-  // const authentication = React.useMemo(() => {
-  //   return {
-  //     signIn: () => {
-  //       setSession({
-  //         user: {
-  //           name: 'Abuzar Ali',
-  //           email: 'abuzarali.edu@gmail.com',
-  //           image: 'https://avatars.githubusercontent.com/u/168404860?v=4',
-  //         },
-  //       });
-  //     },
-  //     signOut: () => {
-  //       setSession(null);
-  //     },
-  //   };
-  // }, []);
+  const authentication = React.useMemo(() => {
+    return {
+      signIn: () => {
+        setSession({
+          user: {
+            name: 'Abuzar Ali',
+            email: 'abuzarali.edu@gmail.com',
+            image: 'https://avatars.githubusercontent.com/u/168404860?v=4',
+          },
+        });
+      },
+      signOut: () => {
+        setSession(null);
+      },
+    };
+  }, []);
 
   const demoTheme = createTheme({
     cssVariables: {
@@ -109,9 +109,9 @@ const AppLayout = ({children}) => {
     <AppProvider
 
     navigation={NAVIGATION}
-    // session={session}
+    session={session}
     theme={demoTheme}    
-    // authentication={authentication}
+    authentication={authentication}
     branding={{
         logo: <img src="https://www.gstatic.com/classroom/logo_square_rounded.svg" alt="Google Classroom logo" />,
         title: "Classroom",
