@@ -1,38 +1,70 @@
 "use client";
-import { Provider } from "react-redux";
-import { store } from "@/redux/store";
 import AssignmentList from "@/app/ui/components/AssigmentsList/AssignmentList";
 import ClassroomHeader from "@/app/ui/components/ClassroomHeader/ClassroomHeader";
 import { classrooms } from "@/data/data";
-import { Box } from "@mui/material";
+import { Box, Typography} from "@mui/material";
 import { useParams } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
+import ClassCode from "@/app/ui/components/ClassCode/ClassCode";
+import { setLoading } from "@/redux/slices/loadingSlice";
+import { useDispatch } from "react-redux";
+import GoogleMeetCard from "@/app/ui/components/MeetCard/MeetCard";
+import AnnouncementCard from "@/app/ui/components/AnnouncementCard/AnnouncementCard";
 
-export default function StreamContent({params}) {
+export default function StreamContent({ params }) {
+  const dispatch = useDispatch();
   const classroom = classrooms.find(
     (classroom) => classroom.id === Number(useParams().id)
   );
   if (!classroom) {
     return <div>Classroom not found</div>;
   }
-
+  
+  useEffect(()=>{
+    dispatch(setLoading(false))
+  },[])
   return (
-    <div className="py-4">
-        <Provider store={store}>
-
-          <ClassroomHeader classroomId={classroom.id} />
-
+    <Box>
+    <ClassroomHeader classroom={classroom} classroomId={classroom.id} />
+  
+    <Box sx={{ maxWidth: "100%", margin: "auto", mt: 4, px: { md:2, lg: 3, xl: 3 } }}>
       <Box
-        sx={{ backgroundImage: `url(${classroom.img})` }}
-        className="m-5 h-60 rounded-lg bg-center bg-no-repeat bg-cover relative" 
+        sx={{
+          backgroundImage: `url(${classroom.img})`,
+          height: "240px",
+          borderRadius: "8px",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          position: "relative",
+        }}
       >
-        <h2 className="text-3xl font-bold text-white absolute bottom-4 left-4 translate-y-[-10px] translate-x-[10px]">
+       <Typography
+          variant="h4"
+          sx={{
+            fontWeight: "bold",
+            color: "white",
+            position: "absolute",
+            bottom: "20px",
+            left: "20px",
+            transform: "translate(-10px, 10px)",
+          }}
+        >
           {classroom.class}
-        </h2>
+        </Typography>
       </Box>
-      {/* Add assignments/resources section here */}
-      <AssignmentList classroomId={params.classroomId} />
-      </Provider>
-    </div>
+  
+      <Box sx={{ mt: 4, display: "flex", flexDirection: { xs: "column", lg: "row" } }}>
+        <Box sx={{ display: { xs: "none", lg: "block" }, width: { lg: "25%" } }}>
+          <GoogleMeetCard/>
+          <ClassCode sx={{ mt: 2 }} classroom={classroom} />
+        </Box>
+        <Box sx={{ width: "100%" }}>
+          <AnnouncementCard/>
+          <AssignmentList classroom={classroom} classroomId={params.classroomId} />
+        </Box>
+      </Box>
+    </Box>
+  </Box>
   );
 }

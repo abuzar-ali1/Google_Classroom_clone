@@ -2,8 +2,10 @@
 
 import ClassroomHeader from "@/app/ui/components/ClassroomHeader/ClassroomHeader";
 import { classrooms } from "@/data/data";
+import { setLoading } from "@/redux/slices/loadingSlice";
 import { useParams } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 export default function PeopleContent() {
   const classroom = classrooms.find(
@@ -13,9 +15,13 @@ export default function PeopleContent() {
     return <div>Classroom not found</div>;
   }
 
+  const dispatch = useDispatch();
+    useEffect(()=>{
+    dispatch(setLoading(false))
+  },[])
   
     return (
-      <div className="py-4">
+      <div>
         <div>
         <ClassroomHeader classroomId={classroom.id}/>
 

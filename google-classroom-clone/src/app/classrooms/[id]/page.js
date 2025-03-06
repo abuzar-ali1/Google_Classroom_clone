@@ -3,5 +3,6 @@ import { redirect, useParams } from 'next/navigation';
 
 export default function Page({  }) {
   const params = useParams();
+  
   redirect(`/classrooms/${params.id}/stream`);
 }

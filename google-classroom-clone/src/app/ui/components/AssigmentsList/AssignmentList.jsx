@@ -1,20 +1,23 @@
 "use client";
 import { useSelector } from 'react-redux';
 import AssignmentCard from '../AssignmentCard/AssignmentCard';
+import { Box } from '@mui/material';
 
-const AssignmentList = ({ classroomId }) => {
+const AssignmentList = ({ classroom }) => {
   const assignments = useSelector((state) =>
     state.assignments.assignments.filter(
-      (a) => a.classroomId === classroomId
+      (a) => a.classroomId === classroom.id
     )
   );
 
+ 
+  
   return (
-    <div className="space-y-4">
+    <Box>
       {assignments.map((assignment) => (
-        <AssignmentCard key={assignment.id} assignment={assignment} />
+        <AssignmentCard classroomId={classroom.id} key={assignment.id} assignment={assignment} />
       ))}
-    </div>
+    </Box>
   );
 };
 

@@ -1,21 +1,53 @@
 "use client";
 import AssignmentForm from '@/app/ui/components/AssignmentForm/AssignmentForm';
-import { store } from '@/redux/store';
-import { Provider, useSelector } from 'react-redux';
+import { classrooms } from '@/data/data';
+import { setLoading } from '@/redux/slices/loadingSlice';
+import { Box, Typography } from '@mui/material';
+import { useParams } from 'next/navigation';
+import React from 'react';
+import React, { useEffect } from 'react';
 
-export default function EditAssignmentPage({ params }) {
-  const assignment = useSelector((state) =>
-    state.assignments.assignments.find(
-      (a) => a.id === params.assignmentId
-    )
-  );
+import { useDispatch, useSelector } from 'react-redux';
 
-  return (
-    <div>
-      <h1>Edit Assignment</h1>
-      <Provider store={store}>
-      <AssignmentForm assignment={assignment} />
-      </Provider>
-    </div>
+export default function EditAssignmentPage() {
+  const params = useParams();
+  const assignmentId = params.assignmentId;
+  const assignments = useSelector((state) => state.assignments.assignments);
+  const assignment = assignments.find(
+    (assignment) => assignment.id === assignmentId
   );
+  
+   const classroom = classrooms.find(
+    (classroom) => classroom.id === Number(useParams().id)
+  );
+  if (!classroom) {
+    return <div>Classroom not found</div>;
+  }
+  const dispatch = useDispatch();
+  useEffect(()=>{
+  dispatch(setLoading(false))
+},[])
+
+  return(
+    <Box>
+        <Typography
+    variant="h4"
+    sx={{
+    fontSize: "1.5rem",
+    fontWeight: 500,
+    
+    fontFamily: "'Google Sans', sans-serif",
+    my: 2,
+    textShadow: "0px 1px 2px rgba(0, 0, 0, 0.1)", 
+    }}
+>
+  Create Assignment
+</Typography>
+
+    <Box>
+      <AssignmentForm classroomId={classroom.id} assignment={assignment} />
+    </Box>
+    </Box>
+  )
+  
 }

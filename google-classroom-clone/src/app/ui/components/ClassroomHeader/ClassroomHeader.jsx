@@ -1,9 +1,12 @@
 "use client"
+import { setLoading } from '@/redux/slices/loadingSlice';
+import { Box } from '@mui/material';
 import Link from 'next/link';
 
 import { usePathname } from 'next/navigation';
+import { useDispatch } from 'react-redux';
 
-
+  
 const ClassroomHeader = ({ classroomId }) => {
   const pathname = usePathname();
   const activeTab = pathname.split('/').pop(); 
@@ -15,29 +18,37 @@ const ClassroomHeader = ({ classroomId }) => {
     { name: 'Grades', path: 'grades' },
 
   ];
+  const dispatch = useDispatch()
+
+  
  
 
   return (
-    <div className=" bg-white w-full border-b-1 border-b-gray-500" >
-      <div className="px-4">
-       
-        <div className ="flex space-x-4">
-          {tabs.map((tab) => (
-            <Link
-              key={tab.path}
-              href={`/classrooms/${classroomId}/${tab.path}`} 
-              className={`font-sans pb-2 px-4 font-medium ${
-                activeTab === tab.path
-                  ? ' border-b-3 border-blue-500 text-blue-500'
-                  : 'text-gray-500 hover:text-gray-700'
-              }`}
-            >
-              {tab.name}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
+
+    <Box sx={{ boxShadow: 2,pt:4, bgcolor: "white", width: "100%", borderBottom: "1px solid", borderColor: "grey.500", position: "sticky", top: 0, zIndex: 1000,  }}>
+      <Box sx={{ px: 4, mx: "auto" }}>
+        <Box sx={{ display: "flex", gap: { sm: 2, md: 3, lg: 4, xl: 4 } }}>
+        {tabs.map((tab) => (
+        <Link key={tab.path} onClick={()=>dispatch(setLoading(true))} href={`/classrooms/${classroomId}/${tab.path}`}      
+            style={{
+              fontFamily: "sans-serif",
+              padding: "0 10px 6px",
+              fontWeight: 500,
+              borderBottom: activeTab === tab.path ? "3px solid #1976d2" : "none",
+              color: activeTab === tab.path ? "#1976d2" : "#9e9e9e",
+              textDecoration: "none"
+            }}
+            underline="none"
+          >
+            {tab.name}
+        
+        </Link>
+      ))}
+        </Box>
+      </Box>
+    </Box>
+    
+    
   );
 };
 

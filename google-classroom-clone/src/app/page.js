@@ -1,6 +1,9 @@
 // app/page.js
+"use client"
 import { redirect } from 'next/navigation';
 
+
 export default function RootPage() {
+
   redirect('/home'); 
 }
